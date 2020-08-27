@@ -2,8 +2,8 @@
 /**
  * @Author: gian
  * @Date:   2016-05-20 14:35:27
- * @Last Modified by:   gian
- * @Last Modified time: 2016-06-06 14:40:09
+ * @Last Modified by:   Gian Carl Anduyan
+ * @Last Modified time: 2020-08-24 11:26:29
  */
 
 
@@ -18,25 +18,25 @@ class Event extends MY_Model{
 
 	public $event_id;
 	public $title;
-	public $from_date;
-	public $description;
+	public $start_date;
+	public $end_date;
+	public $string;
 	public $type;
 	public $work;
 	public $pay;
 	public $event_type;
 	public $backgroundColor;
 	public $repeat;
+	public $description;
 
 
 	public function has_event_on($from,$to){
+		$from =  date('Y-m-d', strtotime(str_replace('-','/', $from)));
 
-		// $to = date('Y-m-d', strtotime($to." + 1 day"));
-		// echo $from."<br>";
-		// echo $to."<br>";
-		$from = $from." 00:01:00";
-		$to = $to." 23:59:00";
+		$date1 = str_replace('-', '/', $to);
+		$tomorrow = date('Y-m-d',strtotime($date1 . "+1 days"));
 
-		$this->db->where(" '{$from}' BETWEEN start_date AND end_date OR '{$to}' BETWEEN start_date AND end_date ");
+		$this->db->where("start_date BETWEEN '{$from}' AND '{$tomorrow}'");
 		$event = $this->get();
 		return $event;
 	}

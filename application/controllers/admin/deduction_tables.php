@@ -200,18 +200,19 @@ class Deduction_tables extends MY_Controller {
 		$data = ['data' => []];
 
 		$this->load->model('philhealth');
-			
-
 		foreach ($eprs as $key => $value) {
 			$ph = new Philhealth;
-			$phEE = $ph->search(['phic_ee_share' => number_format($value->emp_proll_philhealth,2)]);
+			// $phEE = $ph->search(['ph' => number_format($value->emp_proll_philhealth,2)]);
+			$phEE = $ph->db->query("SELECT * FROM philhealth WHERE phic_salary_range_from < '{$value->employment_rate}' AND phic_salary_range_to >  '{$value->employment_rate}'");
 
-			foreach ($phEE as $key2 => $value2) {
+			foreach ($phEE->result_array() as $key2 => $value2) {
+
 				$data['data'][] = [$value->pr_date,
 								$value->fullName('l f, m.'),
+								$value2['phic_monthly_premium'],
 								"Php ".number_format($value->emp_proll_philhealth,2),
-								"Php ".number_format($value2->phic_er_share,2),
-								"Php ".number_format((number_format($value->emp_proll_philhealth,2) + number_format($value2->phic_er_share,2)),2)
+								"Php ".number_format($value->emp_proll_philhealth,2),
+								"Php ".number_format((number_format($value->emp_proll_philhealth,2)*2),2),
 							  ]; 
 			}
 			

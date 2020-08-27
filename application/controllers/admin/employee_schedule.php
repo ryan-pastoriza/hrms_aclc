@@ -2,8 +2,8 @@
 /**
  * @Author: Gian
  * @Date:   2015-08-26 17:21:16
- * @Last Modified by:   Gian
- * @Last Modified time: 2019-07-24 09:41:15
+ * @Last Modified by:   Gian Carl Anduyan
+ * @Last Modified time: 2020-08-20 11:22:33
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -715,7 +715,8 @@ class Employee_Schedule extends MY_Controller {
 			$value->delete();
 		}
 		$toret['success'] = true;
-		$toret['view'] = $this->load->view('shared/success', array('successMsg' => 'Employee Schedule Reverted!'), TRUE);
+		$toret['msg'] = "Employee Schedule Reverted!";
+		// $toret['view'] = $this->load->view('shared/success', array('successMsg' => 'Employee Schedule Reverted!'), TRUE);
 		echo json_encode($toret);
 	}
 	public function revert_entire_dept()

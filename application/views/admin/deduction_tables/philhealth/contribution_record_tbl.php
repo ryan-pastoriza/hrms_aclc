@@ -13,8 +13,8 @@
 														'ajax' => ['url' => base_url('index.php/admin/deduction_tables/phic_contrib_json')],
 														'buttons' => ['print','excel','pdf']
 														],
-									'totalFooter'  	=> [2 => 'Php',
-														3 => 'Php',
+									'totalFooter'  	=> [3 => 'Php',
 														4 => 'Php',
+														5 => 'Php',
 													   ]
 									]);

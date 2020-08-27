@@ -2,8 +2,8 @@
 /**
  * @Author: khrey
  * @Date:   2015-10-01 10:13:24
- * @Last Modified by:   ryanpastoriza
- * @Last Modified time: 2020-01-14 13:44:56
+ * @Last Modified by:   Gian Carl Anduyan
+ * @Last Modified time: 2020-08-24 10:57:43
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -163,6 +163,22 @@ class Daily_time_record extends MY_Controller {
 		asort($headings);
 		return ['headings' => $headings,
 				'overtime' => $overtime];
+	}
+	public function test3(){
+		// $this->load->model('employee');
+		// $emp = new Employee;
+
+		// $emp->attendance('07-20-2020','08-03-2020');
+
+
+		$this->load->model('event');
+		$event = new Event;
+
+		$has = $event->has_event_on('07-20-2020','08-03-2020');
+		echo "<pre>";
+		print_r($has);
+
+		echo "</pre>";
 	}
 	public function  get_json_dtr2($emp_id,$fromDate = false, $toDate = false)
 	{

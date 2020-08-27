@@ -15,6 +15,7 @@ var empSelected;
 	                        },
 	                        data: function () {
 	                              var data = <?= $allEmps ?>;
+	                              // console.log(data);
 
 	                              var filterData = [];
 
@@ -101,7 +102,7 @@ var empSelected;
 			},
 			complete: function(a,b,c,d){
 				var ret = a.responseJSON;
-				console.log(a);
+				// console.log(a);
 
 				$('.loading-div').addClass('hidden');
 				$(c).find("button:submit").removeAttr('disabled');
@@ -304,9 +305,27 @@ var empSelected;
 		}
 		
 	})
-		$(document).on('click','[yes-revert-btn]', function(){
-			alert(empSelected);
-		})
+		// $(document).on('click','[yes-revert-btn]', function(){
+		// 	alert(empSelected);
+		// })
+		$(document).on('click','[yes-revert-btn]',function(r){
+		    var t = $(this);
+		    t.attr('disabled','disabled');
+		    $.ajax({
+		              type: "post",
+		              url:"<?= base_url('index.php/admin/employee_schedule/revert_to_department') ?>",
+		              data: "employee_id="+ empSelected,
+		              dataType: 'json',
+		            success: function(e){
+		                if (e.success == true) {
+		                  toastr.success(e.msg);
+		                  $('.calendar').fullCalendar('refetchEvents');
+		                  $('#revertSchedModal').modal('hide');
+		                }
+		                t.removeAttr('disabled');
+		          	},
+		         })
+	    })
 		$(document).on('click','[delete-event]',function(){
 			var id 			= $(this).attr('delete-event');
 			var event_type  = $(this).attr('sched-type');
@@ -327,7 +346,7 @@ var empSelected;
 		  	$('#set-sched-form button:submit').trigger('click');
 		});
 		$(document).on('click','.override-edit-btn',function(){
-			console.log($('#edit-sched-form submit').length);
+			// console.log($('#edit-sched-form submit').length);
 		  	$('#edit-sched-form [name=edit_sched_overwrite]').val(1);
 		  	$('#edit-sched-modal :submit').trigger('click');
 		});

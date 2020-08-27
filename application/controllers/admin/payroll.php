@@ -2,8 +2,8 @@
 /**
  * @Author: gian
  * @Date:   2015-12-09 10:22:39
- * @Last Modified by:   gian
- * @Last Modified time: 2016-03-08 13:55:17
+ * @Last Modified by:   Gian Carl Anduyan
+ * @Last Modified time: 2020-08-19 11:17:47
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 	
@@ -176,13 +176,13 @@ class Payroll extends MY_Controller {
 		$data['employee'] 		 = $emp;
 		$data['absentDays']		 = $attRec['days_absent'];
 		$data['cut_off'] 		 = date('F d, Y', strtotime($this->input->post('cut_off_start')))." to ". date('F d, Y', strtotime($this->input->post('cut_off_end')));
-			$data['payroll_date'] 	= date('F d, Y', strtotime($this->input->post('proll_date')));
+		$data['payroll_date'] 	= date('F d, Y', strtotime($this->input->post('proll_date')));
 		$data['sss'] 	   		= $this->input->post('sss') ? true : false;
 		$data['philhealth'] 	= $this->input->post('philhealth') ? true : false;
 		$data['pagibig'] 		= $this->input->post('pagibig') ? true : false;
 		$data['adjustments']	= $this->input->post('adjustments');
 		$data['isForm']			= true;
-
+		
 		$this->load->view('admin/payroll/payslip_form',$data, FALSE);
 		$data['isForm']			= false;
 		$this->load->view('admin/payroll/payslip_form',$data, FALSE);

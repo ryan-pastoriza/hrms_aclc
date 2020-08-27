@@ -35,6 +35,7 @@
 		public $employee_contact_person_telephone;
 		public $employee_contact_person_mobile;
 
+
 		public function attendance($from = false, $to = false)
 		{
 			$this->load->model('event');
@@ -1247,15 +1248,15 @@
 			if ($phic->phic_id != "") {
 				$percentage = explode('%', $phic->phic_monthly_premium);
 				$mp = 0;
-				if($percentage){
+				if($this->employment_rate > 10000){
 					$mp = ($this->employment_rate / 100) * $percentage[0];
 					$total_share = $mp / 2;
 				}
 				else{
 					$total_share = $phic->phic_monthly_premium / 2;
 				}
-					$share['employee'] = $total_share;
-					$share['employer'] = $total_share;
+				$share['employee'] = $total_share;
+				$share['employer'] = $total_share;
 				$share['salary_bracket'] = $phic->phic_salary_range_from . " - " . $phic->phic_salary_range_to;
 			}
 
